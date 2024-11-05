@@ -1,0 +1,14 @@
+pydantic_settings
+pydantic~=2.9.2
+pinecone~=5.3.1
+dill~=0.3.8
+fastapi~=0.109.2
+oauthlib~=3.2.2
+transformers~=4.38.2
+pydantic-settings~=2.6.1
+PyMuPDF~=1.24.13
+torch~=2.2.0
+uvicorn~=0.27.1
+qdrant-client~=1.12.1
+fastembed
+dependency-injector

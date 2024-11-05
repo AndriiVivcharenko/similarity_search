@@ -1,0 +1,6 @@
+.idea/**
+.idea
+
+.env
+similarity_search.iml
+ai_adoption_framework_whitepaper.pdf
