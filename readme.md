@@ -2,26 +2,25 @@
 
 ### **The following variables SHOULD be provided (fallback otherwise):**
 
-- `pinecone_api_key` - `default = ""`  Pinecone database api key.
-- `pinecone_index_name` - `default = "whitepaper-similarity"` - Pinecone index name. Will be created automatically
+- `pinecone_api_key` - `default = ""`  Pinecone database API key.
+- `pinecone_index_name` - `default = "whitepaper-similarity"` - Pinecone index name, which will be created automatically.
 - `pinecone_spec_cloud` - `default = "aws"` - pinecone cloud provider
 - `pinecone_spec_region` - `default = "us-east-1" ` - pinecone db region
-- `pinecone_dimensions` - `default = 1024` - embeddings size (see your model documentation)
-- `input_pdf_file` - `default = "ai_adoption_framework_whitepaper.pdf"`- pdf file relative path
-- `chunk_length` - `default = 200` - chunk size to partition the input pdf text
+- `pinecone_dimensions` - `default = 1024` - Embedding size (refer to your model documentation).
+- `input_pdf_file` - `default = "ai_adoption_framework_whitepaper.pdf"`- Relative path to the PDF file.
+- `chunk_length` - `default = 200` -  Chunk size to partition the input PDF text.
 - `transformer_name` - [
-  `default = "intfloat/multilingual-e5-large"`](https://huggingface.co/intfloat/multilingual-e5-large) - model name
+  `default = "intfloat/multilingual-e5-large"`](https://huggingface.co/intfloat/multilingual-e5-large) - Model name
   from [Hugging Face](https://huggingface.co/)
-- `qdrant_host` - `default = "localhost"` - address of your qdrant database. Should be set to `qdrant_db` in case you
-  are running it in docker container using `docker-compose.yaml` file
-- `qdrant_port` - `default = 6333` - port of your qdrant database
-- `qdrant_index_name` - `default = "whitepaper_similarity"` - qdrant collection name. Will be created automatically
-- `x_token` - `default = "super-secret-token"` - Simple secret token for auth.
+- `qdrant_host` - `default = "localhost"` -  Address of your `Qdrant` database. Should be set to `qdrant_db` if running it in a Docker container using `docker-compose.yaml`
+- `qdrant_port` - `default = 6333` - Port of your Qdrant database.
+- `qdrant_index_name` - `default = "whitepaper_similarity"` - - Qdrant collection name, which will be created automatically.
+- `x_token` - `default = "super-secret-token"` - Simple secret token for authentication.
 
 ## Prerequisites
 
-By default the app will be using [qdrant](https://qdrant.tech/) database. 
-In case you want to use [Pinecone](https://www.pinecone.io/) as your database `pinecone_api_key` should be provided AND the following code in `app/di.py` should be changed to
+By default, the app will use [Qdrant](https://qdrant.tech/) as the database. To use [Pinecone](https://www.pinecone.io/), provide `pinecone_api_key` and modify the code in `app/di.py` as follows:
+
 ```python
 
 class Container(containers.DeclarativeContainer):
@@ -31,9 +30,9 @@ class Container(containers.DeclarativeContainer):
 
 ```
 
-In order to run the api locally, you still need to run `qdrant` from `docker-compose.yaml` (if you are not using `pinecone`)
+To run the API locally, you still need to run qdrant from `docker-compose.yaml` (if you aren’t using pinecone).
 
-To do this, run the following docker compose command
+Use the following Docker Compose command:
 ```
 docker compose -f <path to docker-compose.yaml file> -p similarity_search run qdrant_db
 ```
@@ -50,7 +49,7 @@ pip install --no-cache-dir --upgrade -r requirements.txt
 ## Running the app
 
 
-After setting up your environment you can now run the app locally using the following command in your terminal
+After setting up your environment, you can run the app locally using the following command in your terminal:
 ```
 python -m uvicorn app.main:app --port 8000 --host 0.0.0.0
 ```
@@ -63,12 +62,12 @@ uvicorn app.main:app --port 8000 --host 0.0.0.0
 
 ### Docker
 
-If you want to run the app in docker container simply use provided `docker-compose.yaml` with the following command
+To run the app in a Docker container, use the provided `docker-compose.yaml` with the following command:
 ```
 docker compose up
 ```
 
-or with `-f` parameter if you are not in the root directory
+Or, if not in the root directory, use the `-f` parameter:
 ```
 docker compose -f <path to docker-compose.yaml file> up
 ```
@@ -77,13 +76,12 @@ docker compose -f <path to docker-compose.yaml file> up
 
 ### Tests
 
-In order to run the tests you need to install [`pytest`](https://docs.pytest.org/en/stable/)
-
+To run the tests, install [`pytest`](https://docs.pytest.org/en/stable/)
 ```
 pip install pytest
 ```
 
-and run the tests with the following command
+Then, run the tests with the following command:
 ```
 pytest tests/test_main.py
 ```
@@ -92,12 +90,12 @@ pytest tests/test_main.py
 
 ## API
 
-There are two endpoint available.
+There are two available endpoints.
 
-both requires `x_token` header
 
-* `x-token` - secret token for auth from `.env`
+Both require the `x-token` header.
 
+* `x-token` - Secret token for authentication from the `.env` file.
 
 ### GET `/query` 
 make a query to the database
@@ -143,7 +141,8 @@ make a query to the database
 ```
 
 ### POST `query/restore_embeddings` 
-Removes all embeddings from the database and adds new ones after reading provided .pdf file
+Removes all embeddings from the database and adds new ones after reading the provided PDF file.
+
 
 #### Response struct
 

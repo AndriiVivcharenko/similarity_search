@@ -6,6 +6,6 @@ from app.services.pinecone_service import PineconeService#
 
 
 class Container(containers.DeclarativeContainer):
-    # vectordb_service = providers.Singleton(QDrantService)
-    vectordb_service = providers.Singleton(PineconeService)
+    vectordb_service = providers.Singleton(QDrantService)
+    # vectordb_service = providers.Singleton(PineconeService)
     transformer_service = providers.Singleton(TransformerService)
