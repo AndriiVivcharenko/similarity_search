@@ -19,9 +19,9 @@ app.include_router(queries.router)
 container = Container()
 container.wire(modules=[__name__])
 container.wire(modules=["app.routers.queries"])
-container.wire(modules=["app.external_services.pinecone_service"])
-container.wire(modules=["app.external_services.qdrant_service"])
-container.wire(modules=["app.external_services.vector_db_service"])
+container.wire(modules=["app.services.pinecone_service"])
+container.wire(modules=["app.services.qdrant_service"])
+container.wire(modules=["app.services.vector_db_service"])
 container.wire(modules=["app.services.transformer_service"])
 
 

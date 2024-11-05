@@ -2,8 +2,8 @@ import torch
 from transformers import AutoTokenizer, AutoModel
 
 from app.config import settings
-from app.external_services.pinecone_service import PineconeService
-from app.external_services.vector_db_service import IVectorDBService
+from app.services.pinecone_service import PineconeService
+from app.services.vector_db_service import IVectorDBService
 
 
 class TransformerService:

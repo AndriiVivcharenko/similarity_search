@@ -3,7 +3,7 @@ from typing import List
 import pinecone
 
 from app.config import settings
-from app.external_services.vector_db_service import IVectorDBService
+from app.services.vector_db_service import IVectorDBService
 from app.models.query_response import QueryMatch
 
 

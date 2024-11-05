@@ -6,7 +6,7 @@ from fastapi.params import Depends
 
 from app.config import settings
 from app.di import Container
-from app.external_services.vector_db_service import IVectorDBService
+from app.services.vector_db_service import IVectorDBService
 from app.models.query_response import QueryResponseModel, RestoreEmbeddingsResponseModel
 from app.services.transformer_service import TransformerService
 from app.utils.pdf_utils import chunk_text, clean_text, extract_text_from_pdf

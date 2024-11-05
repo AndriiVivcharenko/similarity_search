@@ -1,8 +1,8 @@
 from dependency_injector import containers, providers
 
-from app.external_services.qdrant_service import QDrantService
+from app.services.qdrant_service import QDrantService
 from app.services.transformer_service import TransformerService
-from app.external_services.pinecone_service import PineconeService#
+from app.services.pinecone_service import PineconeService#
 
 
 class Container(containers.DeclarativeContainer):
