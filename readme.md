@@ -17,7 +17,6 @@
 - `qdrant_index_name` - `default = "whitepaper_similarity"` - - Qdrant collection name, which will be created automatically.
 - `x_token` - `default = "super-secret-token"` - Simple secret token for authentication.
 
-## Prerequisites
 
 By default, the app will use [Qdrant](https://qdrant.tech/) as the database. To use [Pinecone](https://www.pinecone.io/), provide `pinecone_api_key` and modify the code in `app/di.py` as follows:
 
@@ -58,6 +57,8 @@ or
 ```
 uvicorn app.main:app --port 8000 --host 0.0.0.0
 ```
+
+When you run the app for the first time, make sure that you call the `query/restore_embeddings` [endpoint](#post-queryrestore_embeddings`) to fill the database with embeddings from the provided .pdf file.
 
 
 ### Docker
