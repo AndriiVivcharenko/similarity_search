@@ -12,7 +12,7 @@
 - `transformer_name` - [
   `default = "intfloat/multilingual-e5-large"`](https://huggingface.co/intfloat/multilingual-e5-large) - Model name
   from [Hugging Face](https://huggingface.co/)
-- `qdrant_host` - `default = "localhost"` -  Address of your `Qdrant` database. Should be set to `qdrant_db` if running it in a Docker container using `docker-compose.yaml`
+- `qdrant_host` - `default = "qdrant_db"` -  Address of your `Qdrant` database. Should be set to `qdrant_db` if running it in a Docker container using `docker-compose.yaml`
 - `qdrant_port` - `default = 6333` - Port of your Qdrant database.
 - `qdrant_index_name` - `default = "whitepaper_similarity"` - - Qdrant collection name, which will be created automatically.
 - `x_token` - `default = "super-secret-token"` - Simple secret token for authentication.

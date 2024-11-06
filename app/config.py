@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     transformer_name: str = "intfloat/multilingual-e5-large"
 
     # qdrant 
-    qdrant_host: str = "localhost"
+    qdrant_host: str = "qdrant_db"
     qdrant_port: int = 6333
     qdrant_index_name: str = "whitepaper_similarity"
 
