@@ -1,3 +1,5 @@
+import os.path
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -25,7 +27,13 @@ class Settings(BaseSettings):
     x_token: str = "super-secret-token"
 
     # config
-    model_config = SettingsConfigDict(env_file=".env")
+    model_config = SettingsConfigDict(
+        env_file=".env"
+    )
 
+
+if not os.path.exists(".env"):
+    with open(".env", "w") as f:
+        f.write("\n")
 
 settings = Settings()

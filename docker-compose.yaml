@@ -5,6 +5,15 @@ services:
       - qdrant_db
     ports:
       - "8000:80"
+    command: [ "python", "-m", "uvicorn", "app.main:app", "--port", "80", "--host", "0.0.0.0", "--timeout-keep-alive", "1200", "--timeout-graceful-shutdown", "1200" ]
+    environment:
+      - UVICORN_CMD=uvicorn
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:80/health" ]
+      interval: 30s
+      retries: 3
+      start_period: 5s
+      timeout: 10s
     
   qdrant_db:
     image: qdrant/qdrant

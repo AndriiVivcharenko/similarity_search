@@ -44,7 +44,7 @@ async def get_query(
         raise HTTPException(status_code=500, detail="Internal Server Error {0}".format(e))
 
 
-@router.post("/restore_embeddings", )
+@router.post("/restore_embeddings")
 @inject
 async def restore_embeddings(
         vectordb_service: IVectorDBService = Depends(Provide[Container.vectordb_service]),
