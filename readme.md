@@ -1,5 +1,11 @@
 ## **ENV variables**
 
+An empty `.env` file should be created to run the application locally (the Docker container creates it automatically for you). To create the `.env` file, you can either do so manually or use the `setup_env.sh` bash script with the following command:
+
+```
+ sh setup_env.sh
+```
+
 ### **The following variables SHOULD be provided (fallback otherwise):**
 
 - `pinecone_api_key` - `default = ""`  Pinecone database API key.
