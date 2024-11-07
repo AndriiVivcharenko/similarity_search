@@ -36,21 +36,43 @@ Use the following Docker Compose command:
 docker compose -f <path to docker-compose.yaml file> -p similarity_search run qdrant_db
 ```
 
-## Requirements
-
+## Python environment
 * Python 3.10 or 3.11
-* Install dependencies
+
+**Important**
+Replace `python3` with `python` if you're using Windows or another default Python installation.
+
+
+### Create a Virtual Environment
+Run the following command to create a venv in a directory called venv inside the project folder:
+```
+python3 -m venv venv
+```
+
+### Activate the Virtual Environment:
+
+
+* macOS/Linux
+```
+source venv/bin/activate
+```
+* Windows
+```
+.\venv\Scripts\activate
+```
+
+### Install Project Dependencies
+With the environment activated, install dependencies using pip:
 ```
 pip install --no-cache-dir --upgrade -r requirements.txt
 ```
-
 
 ## Running the app
 
 
 After setting up your environment, you can run the app locally using the following command in your terminal:
 ```
-python -m uvicorn app.main:app --port 8000 --host 0.0.0.0
+python3 -m uvicorn app.main:app --port 8000 --host 0.0.0.0
 ```
 
 or
@@ -59,7 +81,6 @@ uvicorn app.main:app --port 8000 --host 0.0.0.0
 ```
 
 When you run the app for the first time, make sure that you call the `query/restore_embeddings` [endpoint](#post-queryrestore_embeddings`) to fill the database with embeddings from the provided .pdf file.
-
 
 ### Docker
 

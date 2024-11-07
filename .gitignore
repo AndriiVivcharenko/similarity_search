@@ -3,3 +3,5 @@
 
 .env
 similarity_search.iml
+venv/**
+venv
