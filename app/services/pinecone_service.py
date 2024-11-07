@@ -3,8 +3,8 @@ from typing import List
 import pinecone
 
 from app.config import settings
-from app.services.vector_db_service import IVectorDBService
 from app.models.query_response import QueryMatch
+from app.services.vector_db_service import IVectorDBService
 
 
 class PineconeService(IVectorDBService):

@@ -2,7 +2,6 @@ import torch
 from transformers import AutoTokenizer, AutoModel
 
 from app.config import settings
-from app.services.pinecone_service import PineconeService
 from app.services.vector_db_service import IVectorDBService
 
 
@@ -11,7 +10,7 @@ class TransformerService:
         self.tokenizer = AutoTokenizer.from_pretrained(settings.transformer_name)
         self.model = AutoModel.from_pretrained(settings.transformer_name)
 
-    def embed_text(self, text):
+    def embed_text(self, text: str):
         inputs = self.tokenizer(text, return_tensors="pt", padding=True, truncation=True)
         with torch.no_grad():
             embeddings = self.model(**inputs).last_hidden_state.mean(dim=1)

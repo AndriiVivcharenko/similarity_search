@@ -1,11 +1,7 @@
-import sys
-
-import uvicorn
 from fastapi import FastAPI
 from fastapi.params import Depends
 
 from app.di import Container
-from .config import settings
 from .dependencies import get_token_header
 from .routers import queries
 

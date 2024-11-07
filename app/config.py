@@ -31,6 +31,11 @@ class Settings(BaseSettings):
         env_file=".env"
     )
 
+    environment: str = "development"
+    
+    def is_dev(self):
+        return self.environment == "development"
+
 
 if not os.path.exists(".env"):
     with open(".env", "w") as f:

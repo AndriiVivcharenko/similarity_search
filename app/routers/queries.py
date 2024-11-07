@@ -1,3 +1,4 @@
+import os.path
 from typing import Annotated
 
 from dependency_injector.wiring import inject, Provide
@@ -6,9 +7,9 @@ from fastapi.params import Depends
 
 from app.config import settings
 from app.di import Container
-from app.services.vector_db_service import IVectorDBService
 from app.models.query_response import QueryResponseModel, RestoreEmbeddingsResponseModel
 from app.services.transformer_service import TransformerService
+from app.services.vector_db_service import IVectorDBService
 from app.utils.pdf_utils import chunk_text, clean_text, extract_text_from_pdf
 
 router = APIRouter(
@@ -41,7 +42,9 @@ async def get_query(
             )
         )
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Internal Server Error {0}".format(e))
+        raise HTTPException(status_code=500, detail="Internal Server Error {0}".format(
+            str(e) if settings.is_dev() else ""
+        ))
 
 
 @router.post("/restore_embeddings")
@@ -54,14 +57,37 @@ async def restore_embeddings(
     Removes all embeddings from the database
     and adds new ones after reading the pdf file
     """
-    try:
-        chunks = chunk_text(
-            clean_text(
-                extract_text_from_pdf(
-                    settings.input_pdf_file
-                )
-            )
+
+    if (not os.path.exists(settings.input_pdf_file) or
+            not os.path.isfile(settings.input_pdf_file)):
+        raise HTTPException(
+            status_code=404,
+            detail="Input pdf file does not exist"
         )
+
+    try:
+        pdf_text = extract_text_from_pdf(
+            settings.input_pdf_file
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500,
+                            detail="Error while extracting text from pdf file: {0}".format(
+                                str(e) if settings.is_dev() else ""))
+
+    try:
+        processed_text = clean_text(pdf_text)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Error while cleaning text from pdf file: {0}".format(
+            str(e) if settings.is_dev() else ""))
+
+    try:
+        chunks = chunk_text(processed_text)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Error while chunking text from pdf file: {0}".format(
+            str(e) if settings.is_dev() else ""
+        ))
+
+    try:
         transformer_service.store_embeddings(
             chunks=chunks,
             vectordb_service=vectordb_service
@@ -71,4 +97,7 @@ async def restore_embeddings(
             number_of_embeddings=len(chunks)
         )
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500,
+                            detail="Internal Server Error: {0}".format(
+                                str(e) if settings.is_dev() else ""
+                            ))

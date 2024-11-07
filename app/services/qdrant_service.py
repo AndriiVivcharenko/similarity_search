@@ -1,11 +1,11 @@
 from typing import List
 
 from qdrant_client import QdrantClient
-from qdrant_client.http.models import PointStruct, VectorParams, Distance, Filter, ScoredPoint
+from qdrant_client.http.models import PointStruct, VectorParams, Distance, ScoredPoint
 
 from app.config import settings
-from app.services.vector_db_service import IVectorDBService
 from app.models.query_response import QueryMatch
+from app.services.vector_db_service import IVectorDBService
 
 
 class QDrantService(IVectorDBService):
