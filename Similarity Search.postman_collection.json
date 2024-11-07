@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "1cad74c2-e9fa-43da-9da1-e00609c38419",
+		"name": "Similarity Search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "14027028",
+		"_collection_link": "https://blue-astronaut-243445.postman.co/workspace/crypto~c8b1a321-58a5-4ada-90b5-3b424e4d3aa8/collection/14027028-1cad74c2-e9fa-43da-9da1-e00609c38419?action=share&source=collection_link&creator=14027028"
+	},
+	"item": [
+		{
+			"name": "Query Embeddings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "super-secret-token",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/query?q=Explainable AI",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"query"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Explainable AI"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Restore Embeddings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "super-secret-token",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:8000/query/restore_embeddings"
+			},
+			"response": []
+		}
+	]
+}

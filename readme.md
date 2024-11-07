@@ -114,14 +114,13 @@ Then, run the tests with the following command:
 pytest tests/test_main.py
 ```
 
-
-
 ## API
 
 There are two available endpoints.
+You can import the Postman collection available in the root directory — [Similarity Search.postman_collection.json](Similarity%20Search.postman_collection.json)
 
 
-Both require the `x-token` header.
+Both endpoints require the `x-token` header.
 
 * `x-token` - Secret token for authentication from the `.env` file.
 
@@ -131,6 +130,11 @@ make a query to the database
 #### Parameters
 * `q` - Query string **(required)**
 * `top_k` = Number of top results to return **(default value: 3)**
+
+```shell
+curl --location 'http://localhost:8000/query?q=Explainable%20AI&top_k=3' \
+--header 'x-token: super-secret-token'
+```
 
 #### Response struct
 
@@ -171,6 +175,10 @@ make a query to the database
 ### POST `query/restore_embeddings` 
 Removes all embeddings from the database and adds new ones after reading the provided PDF file.
 
+```shell
+curl --location --request POST 'http://localhost:8000/query/restore_embeddings' \
+--header 'x-token: super-secret-token'
+```
 
 #### Response struct
 
